@@ -9,14 +9,12 @@
  * @author     Patrick Robin <support@rietrob.de>
  * @Version      1.0.0
  */
-
 using MetaDataXMLGenerator.MetaDataConsole.Config;
+using MetaDataXMLGenerator.MetaDataConsole.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using MetaDataXMLGenerator.MetaDataConsole.Models;
 
 namespace MetadataXMLGenerator.MetaDataConsole
 {
@@ -143,7 +141,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
                         }
                     }
                     _fileWriter.PathForMetadataXml = rootFolder;
-                    _fileWriter.writeMetadataXML(metaDataEntries);
+                    _fileWriter.WriteMetadataXml(metaDataEntries);
                 }
                 
                 Console.WriteLine($"{i} von {_allFolders.Count} verarbeitet.");

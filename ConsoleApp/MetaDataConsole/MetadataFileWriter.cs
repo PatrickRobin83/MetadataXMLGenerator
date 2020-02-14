@@ -10,19 +10,19 @@
  * @Version      1.0.0
  */
 
+using MetaDataXMLGenerator.MetaDataConsole.Config;
+using MetaDataXMLGenerator.MetaDataConsole.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
-using System.Windows.Documents;
 using System.Xml;
-using System.Xml.Serialization;
-using MetaDataXMLGenerator.MetaDataConsole.Config;
-using MetaDataXMLGenerator.MetaDataConsole.Models;
 
 namespace MetadataXMLGenerator.MetaDataConsole
 {
+    /// <summary>
+    /// This Class 
+    /// </summary>
     public class MetadataFileWriter
     {
 
@@ -49,7 +49,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// Writes the Metadata.xml file
         /// </summary>
         /// <param name="entries"></param>
-        public void writeMetadataXML(List<MetaDataEntry> entries)
+        public void WriteMetadataXml(List<MetaDataEntry> entries)
         {
             if (File.Exists(PathForMetadataXml + "\\Metadata.xml"))
             {

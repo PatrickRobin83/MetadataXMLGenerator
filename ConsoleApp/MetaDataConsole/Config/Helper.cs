@@ -15,17 +15,20 @@ using System.Net;
 
 namespace MetaDataXMLGenerator.MetaDataConsole.Config
 {
+    /// <summary>
+    /// This class contains all stuff for setting up
+    /// </summary>
     public static class Helper
     {
-
 
         #region Fields
 
         #endregion
 
         #region Properties
-        /// <summary>
-        /// path of the settings.ini </summary>
+        ///  <summary>
+        /// path of the settings.ini
+        /// </summary>
         public static string SettingsIniFile = "resources\\Settings.ini";
         
 
@@ -36,9 +39,14 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// Converts the given string into the right url format.
+        /// </summary>
+        /// <param name="stringToConvert"></param>
+        /// <returns></returns>
         public static string convert(string stringToConvert)
         {
+            if (stringToConvert == null) throw new ArgumentNullException(nameof(stringToConvert));
             string url = stringToConvert;
 
             url = url.Replace("\\", "/");
@@ -53,6 +61,5 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
         }
 
         #endregion
-
     }
 }

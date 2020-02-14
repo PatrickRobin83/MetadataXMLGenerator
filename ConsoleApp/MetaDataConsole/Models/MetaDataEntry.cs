@@ -11,11 +11,12 @@
  */
 
 using System;
-using System.Web;
-using MetaDataXMLGenerator.MetaDataConsole.Config;
 
 namespace MetaDataXMLGenerator.MetaDataConsole.Models
 {
+    /// <summary>
+    /// This Class is only the datamodel for an xml entry
+    /// </summary>
     public class MetaDataEntry
     {
         

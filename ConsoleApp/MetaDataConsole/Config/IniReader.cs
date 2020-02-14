@@ -17,13 +17,17 @@ using System.Text;
 
 namespace MetaDataXMLGenerator.MetaDataConsole.Config
 {
+
+    /// <summary>
+    /// This Class provides methods to read, write,  delete, sectiondelete and look up for an key
+    /// </summary>
     public  class IniReader
     {
 
         #region Fields
 
-        string Path; 
-        string EXE = Assembly.GetExecutingAssembly().GetName().Name;
+        private readonly string _path;
+        private readonly string _exe = Assembly.GetExecutingAssembly().GetName().Name;
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
         static extern long WritePrivateProfileString(string Section, string Key, string Value, string FilePath);
 
@@ -41,7 +45,7 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
 
         public IniReader(string iniPath = null)
         {
-            Path = new FileInfo(iniPath ?? EXE + ".ini").FullName.ToString();
+            _path = new FileInfo(iniPath ?? _exe + ".ini").FullName.ToString();
         }
 
         #endregion
@@ -51,23 +55,23 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
         public string Read(string Key, string Section = null)
         {
             var RetVal = new StringBuilder(255);
-            GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 255, Path);
+            GetPrivateProfileString(Section ?? _exe, Key, "", RetVal, 255, _path);
             return RetVal.ToString();
         }
 
         public void Write(string Key, string Value, string Section = null)
         {
-            WritePrivateProfileString(Section ?? EXE, Key, Value, Path);
+            WritePrivateProfileString(Section ?? _exe, Key, Value, _path);
         }
 
         public void DeleteKey(string Key, string Section = null)
         {
-            Write(Key, null, Section ?? EXE);
+            Write(Key, null, Section ?? _exe);
         }
 
         public void DeleteSection(string Section = null)
         {
-            Write(null, null, Section ?? EXE);
+            Write(null, null, Section ?? _exe);
         }
 
         public bool KeyExists(string Key, string Section = null)
