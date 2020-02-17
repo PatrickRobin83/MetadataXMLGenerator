@@ -72,7 +72,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
 
         #region Methods
         /// <summary>
-        /// Starts the Metadata Generation Process
+        /// Starts the Metadata Generation or Remove Process
         /// </summary>
         public void Run()
         {
@@ -98,7 +98,6 @@ namespace MetadataXMLGenerator.MetaDataConsole
                         
                         break;
                 }
-
                 Console.WriteLine("[FINISH]");
                 Console.WriteLine();
                 Thread.Sleep(1500);
@@ -114,7 +113,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
         }
 
         /// <summary>
-        /// gets the patzh from all Folders which are in the root path
+        /// gets the path from all Folders which are in the root path
         /// </summary>
         /// <param name="rootPath"></param>
         private void getFoldersFromRootPath(string rootPath)
