@@ -31,7 +31,6 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
         /// </summary>
         public static string SettingsIniFile = "resources\\Settings.ini";
         
-
         #endregion
 
         #region Constructor

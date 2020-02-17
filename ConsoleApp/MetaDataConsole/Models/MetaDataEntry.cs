@@ -67,9 +67,6 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Models
         #endregion
 
         #region Methods
-
-        
-
         #endregion
 
         

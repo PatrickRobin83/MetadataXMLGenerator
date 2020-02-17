@@ -51,6 +51,7 @@
     <Compile Include="Config\Helper.cs" />
     <Compile Include="Config\IniReader.cs" />
     <Compile Include="DirectoryAndFileReader.cs" />
+    <Compile Include="MetaDataFileRemover.cs" />
     <Compile Include="MetadataFileWriter.cs" />
     <Compile Include="Models\MetaDataEntry.cs" />
     <Compile Include="Program.cs" />

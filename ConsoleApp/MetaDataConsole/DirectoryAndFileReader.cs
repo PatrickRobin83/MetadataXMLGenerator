@@ -14,7 +14,9 @@ using MetaDataXMLGenerator.MetaDataConsole.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
+using MetaDataXMLGenerator.MetaDataConsole;
 
 namespace MetadataXMLGenerator.MetaDataConsole
 {
@@ -30,6 +32,12 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// Metadata.xml writer instance
         /// </summary>
         private MetadataFileWriter _fileWriter = new MetadataFileWriter();
+
+        /// <summary>
+        /// Metadata.xml remover instance
+        /// </summary>
+        private MetaDataFileRemover _fileRemover = new MetaDataFileRemover();
+
         /// <summary>
         /// Temporary List of Folders from the parent folder
         /// </summary>
@@ -42,6 +50,8 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// Rootpath from the ini file. Where to start searching
         /// </summary>
         private string _rootPath;
+
+        private ConsoleKey _decision;
 
         #endregion
 
@@ -68,20 +78,36 @@ namespace MetadataXMLGenerator.MetaDataConsole
         {
             try
             {
+                Console.Clear();
                 _allFolders.Add(_rootPath);
                 getFoldersFromRootPath(_rootPath);
-                getFilesInFolder(_allFolders);
+                Console.Write("Generate Metadata.xml Files Type (g)| Delete all Metadata.xml files Type (d): ");
+                _decision = Console.ReadKey().Key;
+                Console.WriteLine();
+                
+                switch (_decision)
+                {
+                    case ConsoleKey.D:
+                        _fileRemover.RemoveMetadataXmlFromFolder(_allFolders);
+                    break;
+                        
+                    case ConsoleKey.G:
+                        getFilesInFolder(_allFolders);
+                        break;
+                    default:
+                        
+                        break;
+                }
 
                 Console.WriteLine("[FINISH]");
                 Console.WriteLine();
                 Thread.Sleep(1500);
-                Console.Write("Bitte eine beliebige Taste drücken um das Programm zu beenden.....");
+                Console.Write("Press any Key to close the console.....");
                 Console.ReadKey();
                 
             }
             catch (DirectoryNotFoundException directoryNotFound)
             {
-
                 Console.WriteLine(directoryNotFound.Message);
                 Console.ReadKey();
             }
