@@ -9,14 +9,13 @@
  * @author     Patrick Robin <support@rietrob.de>
  * @Version      1.0.0
  */
+using MetaDataXMLGenerator.MetaDataConsole;
 using MetaDataXMLGenerator.MetaDataConsole.Config;
 using MetaDataXMLGenerator.MetaDataConsole.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading;
-using MetaDataXMLGenerator.MetaDataConsole;
 
 namespace MetadataXMLGenerator.MetaDataConsole
 {
@@ -68,6 +67,11 @@ namespace MetadataXMLGenerator.MetaDataConsole
             _rootPath = _iniReader.Read("Rootpath", "Local");
         }
 
+        /// <summary>
+        /// Rootpath from the ini file. Where to start searching
+        /// </summary>
+        public string RootPath => _rootPath;
+
         #endregion
 
         #region Methods
@@ -79,8 +83,8 @@ namespace MetadataXMLGenerator.MetaDataConsole
             try
             {
                 Console.Clear();
-                _allFolders.Add(_rootPath);
-                getFoldersFromRootPath(_rootPath);
+                _allFolders.Add(RootPath);
+                getFoldersFromRootPath(RootPath);
                 Console.Write("Generate Metadata.xml Files Type (g)| Delete all Metadata.xml files Type (d): ");
                 _decision = Console.ReadKey().Key;
                 Console.WriteLine();
@@ -156,7 +160,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
                     {
                         if (!fileInfo.Name.EndsWith(".xml") && !fileInfo.Name.EndsWith(".ffs_db"))
                         {
-                            string tmp_Name = fileInfo.FullName.Remove(0, _rootPath.Length);
+                            string tmp_Name = fileInfo.FullName.Remove(0, RootPath.Length);
 
                             string uriPath = Helper.convert(tmp_Name);
 

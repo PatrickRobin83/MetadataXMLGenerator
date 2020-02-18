@@ -58,7 +58,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
 
             if (entries.Count > 0)
             {
-                Console.WriteLine($"Datei wurde in: {PathForMetadataXml} geschrieben");
+                Console.WriteLine($"File created in: {PathForMetadataXml} ");
                 Console.WriteLine();
                 XmlDocument doc = new XmlDocument();
                 XmlNode declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "yes");
@@ -67,23 +67,24 @@ namespace MetadataXMLGenerator.MetaDataConsole
                 XmlNode docRoot = doc.CreateElement("Directory");
                 foreach (MetaDataEntry entry in entries)
                 {
-
-
-                    XmlNode fileElement = doc.CreateElement("File");
-                    XmlAttribute attribute = doc.CreateAttribute("name");
-                    attribute.Value = entry.FileName;
-                    XmlNode systemTags = doc.CreateElement("SystemTags");
-                    fileElement.AppendChild(systemTags);
-                    XmlNode systemTagNode = doc.CreateElement("SystemTag");
-                    systemTags.AppendChild(systemTagNode);
-                    XmlAttribute systemTag = doc.CreateAttribute("name");
-                    XmlAttribute value = doc.CreateAttribute("value");
-                    systemTag.Value = entry.SystemTagName;
-                    value.Value = entry.SystemTagValue;
-                    systemTagNode.Attributes.Append(systemTag);
-                    systemTagNode.Attributes.Append(value);
-                    fileElement.Attributes.Append(attribute);
-                    docRoot.AppendChild(fileElement);
+                    if (!string.IsNullOrEmpty(entry.SystemTagValue))
+                    {
+                        XmlNode fileElement = doc.CreateElement("File");
+                        XmlAttribute attribute = doc.CreateAttribute("name");
+                        attribute.Value = entry.FileName;
+                        XmlNode systemTags = doc.CreateElement("SystemTags");
+                        fileElement.AppendChild(systemTags);
+                        XmlNode systemTagNode = doc.CreateElement("SystemTag");
+                        systemTags.AppendChild(systemTagNode);
+                        XmlAttribute systemTag = doc.CreateAttribute("name");
+                        XmlAttribute value = doc.CreateAttribute("value");
+                        systemTag.Value = entry.SystemTagName;
+                        value.Value = entry.SystemTagValue;
+                        systemTagNode.Attributes.Append(systemTag);
+                        systemTagNode.Attributes.Append(value);
+                        fileElement.Attributes.Append(attribute);
+                        docRoot.AppendChild(fileElement);
+                    }
                 }
                 doc.AppendChild(docRoot);
                 doc.Save(PathForMetadataXml + "\\Metadata.xml");
