@@ -26,6 +26,7 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
         #endregion
 
         #region Properties
+
         ///  <summary>
         /// path of the settings.ini
         /// </summary>
@@ -38,6 +39,7 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
         #endregion
 
         #region Methods
+
         /// <summary>
         /// Converts the given string into the right url format.
         /// </summary>

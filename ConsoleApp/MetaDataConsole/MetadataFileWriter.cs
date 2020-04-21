@@ -45,6 +45,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
         #endregion
 
         #region Methods
+
         /// <summary>
         /// Writes the Metadata.xml file
         /// </summary>

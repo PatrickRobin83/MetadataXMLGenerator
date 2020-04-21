@@ -40,6 +40,10 @@ namespace MetaDataXMLGenerator.MetaDataConsole
 
         #region Methods
 
+        /// <summary>
+        /// Removes the Metadata.xml File from the every Location in the given Folder List
+        /// </summary>
+        /// <param name="allFolder"></param>
         public void RemoveMetadataXmlFromFolder(List<string> allFolder)
         {
 

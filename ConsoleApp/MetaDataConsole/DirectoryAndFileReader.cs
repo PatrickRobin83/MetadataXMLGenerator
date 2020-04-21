@@ -23,10 +23,12 @@ namespace MetadataXMLGenerator.MetaDataConsole
     {
         
         #region Fields
+
         /// <summary>
         /// IniFile reader instance
         /// </summary>
         private IniReader _iniReader = new IniReader(Helper.SettingsIniFile);
+
         /// <summary>
         /// Metadata.xml writer instance
         /// </summary>
@@ -36,15 +38,17 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// Metadata.xml remover instance
         /// </summary>
         private MetaDataFileRemover _fileRemover = new MetaDataFileRemover();
-
+        
         /// <summary>
         /// Temporary List of Folders from the parent folder
         /// </summary>
         private List<string> _folderPathes;
+
         /// <summary>
         /// List of all Folders including the root Folder from Settings.ini file
         /// </summary>
         private List<string> _allFolders = new List<string>();
+
         /// <summary>
         /// Rootpath from the ini file. Where to start searching
         /// </summary>

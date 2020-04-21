@@ -22,6 +22,7 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Models
         
 
         #region Fields
+
         /// <summary>
         /// Filename without the path
         /// </summary>
