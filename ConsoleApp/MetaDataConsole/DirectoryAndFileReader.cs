@@ -55,8 +55,14 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// </summary>
         private string _rootPath;
 
+        /// <summary>
+        /// Rootpath for the downloadlink from the web
+        /// </summary>
         private string _webRootPath;
 
+        /// <summary>
+        /// User pressed key
+        /// </summary>
         private ConsoleKey _decision;
 
         #endregion
@@ -80,6 +86,9 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// </summary>
         public string RootPath => _rootPath;
 
+        /// <summary>
+        /// Rootpath for the downloadlink from the web
+        /// </summary>
         public string WebRootPath => _webRootPath;
 
         #endregion
