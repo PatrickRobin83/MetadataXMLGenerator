@@ -15,6 +15,7 @@ using MetaDataXMLGenerator.MetaDataConsole.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace MetadataXMLGenerator.MetaDataConsole
@@ -54,6 +55,8 @@ namespace MetadataXMLGenerator.MetaDataConsole
         /// </summary>
         private string _rootPath;
 
+        private string _webRootPath;
+
         private ConsoleKey _decision;
 
         #endregion
@@ -69,12 +72,15 @@ namespace MetadataXMLGenerator.MetaDataConsole
         public DirectoryAndFileReader()
         {
             _rootPath = _iniReader.Read("Rootpath", "Local");
+            _webRootPath = _iniReader.Read("Rootpath", "Web");
         }
 
         /// <summary>
         /// Rootpath from the ini file. Where to start searching
         /// </summary>
         public string RootPath => _rootPath;
+
+        public string WebRootPath => _webRootPath;
 
         #endregion
 
@@ -89,7 +95,11 @@ namespace MetadataXMLGenerator.MetaDataConsole
                 Console.Clear();
                 _allFolders.Add(RootPath);
                 getFoldersFromRootPath(RootPath);
-                Console.Write("Generate Metadata.xml Files Type (g)| Delete all Metadata.xml files Type (d): ");
+                Console.WriteLine($"Local Rootpath: {RootPath}");
+                Console.WriteLine();
+                Console.WriteLine($"Web Rootpath: {WebRootPath}");
+                Console.WriteLine();
+                Console.Write("Generate Metadata.xml Files Type (g)| Delete all Metadata.xml files Type (d) | Exit Program (x): ");
                 _decision = Console.ReadKey().Key;
                 Console.WriteLine();
                 
@@ -101,6 +111,9 @@ namespace MetadataXMLGenerator.MetaDataConsole
                         
                     case ConsoleKey.G:
                         getFilesInFolder(_allFolders);
+                        break;
+                    case ConsoleKey.X:
+                        Environment.Exit(0);
                         break;
                     default:
                         
@@ -162,7 +175,7 @@ namespace MetadataXMLGenerator.MetaDataConsole
                 {
                     foreach (FileInfo fileInfo in di.GetFiles())
                     {
-                        if (!fileInfo.Name.EndsWith(".xml") && !fileInfo.Name.EndsWith(".ffs_db"))
+                        if (!fileInfo.Name.EndsWith(".xml") && !fileInfo.Name.EndsWith(".ffs_db") && !fileInfo.Name.EndsWith(".db"))
                         {
                             string tmp_Name = fileInfo.FullName.Remove(0, RootPath.Length);
 

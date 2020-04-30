@@ -57,40 +57,47 @@ namespace MetadataXMLGenerator.MetaDataConsole
                 File.Delete(PathForMetadataXml + "\\Metadata.xml");
             }
 
-            if (entries.Count > 0)
+            try
             {
-                Console.WriteLine($"File created in: {PathForMetadataXml} ");
-                Console.WriteLine();
-                XmlDocument doc = new XmlDocument();
-                XmlNode declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "yes");
-                doc.AppendChild(declaration);
-
-                XmlNode docRoot = doc.CreateElement("Directory");
-                foreach (MetaDataEntry entry in entries)
+                if (entries.Count > 0)
                 {
-                    if (!string.IsNullOrEmpty(entry.SystemTagValue))
+                    Console.WriteLine($"File created in: {PathForMetadataXml} ");
+                    Console.WriteLine();
+                    XmlDocument doc = new XmlDocument();
+                    XmlNode declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "yes");
+                    doc.AppendChild(declaration);
+
+                    XmlNode docRoot = doc.CreateElement("Directory");
+                    foreach (MetaDataEntry entry in entries)
                     {
-                        XmlNode fileElement = doc.CreateElement("File");
-                        XmlAttribute attribute = doc.CreateAttribute("name");
-                        attribute.Value = entry.FileName;
-                        XmlNode systemTags = doc.CreateElement("SystemTags");
-                        fileElement.AppendChild(systemTags);
-                        XmlNode systemTagNode = doc.CreateElement("SystemTag");
-                        systemTags.AppendChild(systemTagNode);
-                        XmlAttribute systemTag = doc.CreateAttribute("name");
-                        XmlAttribute value = doc.CreateAttribute("value");
-                        systemTag.Value = entry.SystemTagName;
-                        value.Value = entry.SystemTagValue;
-                        systemTagNode.Attributes.Append(systemTag);
-                        systemTagNode.Attributes.Append(value);
-                        fileElement.Attributes.Append(attribute);
-                        docRoot.AppendChild(fileElement);
+                        if (!string.IsNullOrEmpty(entry.SystemTagValue))
+                        {
+                            XmlNode fileElement = doc.CreateElement("File");
+                            XmlAttribute attribute = doc.CreateAttribute("name");
+                            attribute.Value = entry.FileName;
+                            XmlNode systemTags = doc.CreateElement("SystemTags");
+                            fileElement.AppendChild(systemTags);
+                            XmlNode systemTagNode = doc.CreateElement("SystemTag");
+                            systemTags.AppendChild(systemTagNode);
+                            XmlAttribute systemTag = doc.CreateAttribute("name");
+                            XmlAttribute value = doc.CreateAttribute("value");
+                            systemTag.Value = entry.SystemTagName;
+                            value.Value = entry.SystemTagValue;
+                            systemTagNode.Attributes.Append(systemTag);
+                            systemTagNode.Attributes.Append(value);
+                            fileElement.Attributes.Append(attribute);
+                            docRoot.AppendChild(fileElement);
+                        }
                     }
+                    doc.AppendChild(docRoot);
+                    doc.Save(PathForMetadataXml + "\\Metadata.xml");
+
+                    Thread.Sleep(100);
                 }
-                doc.AppendChild(docRoot);
-                doc.Save(PathForMetadataXml + "\\Metadata.xml");
-                
-                Thread.Sleep(100);
+            }
+            catch (UnauthorizedAccessException ex)    
+            {
+                Console.Error.WriteLine(ex.Message);
             }
         }
 
