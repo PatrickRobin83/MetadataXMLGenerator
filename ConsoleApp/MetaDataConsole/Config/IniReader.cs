@@ -19,7 +19,7 @@ namespace MetaDataXMLGenerator.MetaDataConsole.Config
 {
 
     /// <summary>
-    /// This Class provides methods to read, write,  delete, sectiondelete and look up for an key
+    /// This Class provides methods to read, write,  delete, sectiondelete and look up for an key inside a *.ini file
     /// </summary>
     public  class IniReader
     {
