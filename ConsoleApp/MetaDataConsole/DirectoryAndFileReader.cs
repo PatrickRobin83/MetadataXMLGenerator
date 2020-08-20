@@ -68,7 +68,15 @@ namespace MetadataXMLGenerator.MetaDataConsole
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Rootpath from the ini file. Where to start searching
+        /// </summary>
+        public string RootPath => _rootPath;
 
+        /// <summary>
+        /// Rootpath for the downloadlink from the web
+        /// </summary>
+        public string WebRootPath => _webRootPath;
         #endregion
 
         #region Constructor
@@ -80,17 +88,6 @@ namespace MetadataXMLGenerator.MetaDataConsole
             _rootPath = _iniReader.Read("Rootpath", "Local");
             _webRootPath = _iniReader.Read("Rootpath", "Web");
         }
-
-        /// <summary>
-        /// Rootpath from the ini file. Where to start searching
-        /// </summary>
-        public string RootPath => _rootPath;
-
-        /// <summary>
-        /// Rootpath for the downloadlink from the web
-        /// </summary>
-        public string WebRootPath => _webRootPath;
-
         #endregion
 
         #region Methods
